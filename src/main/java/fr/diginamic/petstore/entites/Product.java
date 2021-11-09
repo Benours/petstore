@@ -3,6 +3,7 @@ package fr.diginamic.petstore.entites;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -24,7 +25,7 @@ public class Product {
 	@Enumerated(EnumType.STRING)
 	private ProdType type;
 	
-	@ManyToMany(mappedBy = "products")
+	@ManyToMany(mappedBy = "products", cascade = CascadeType.ALL)
 	private Set<PetStore> petStores = new HashSet<PetStore>();
 
 	/**

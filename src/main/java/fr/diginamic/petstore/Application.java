@@ -7,6 +7,7 @@ import java.util.Set;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -59,8 +60,21 @@ public class Application {
         petstore1.addAnimal(poisson2);
 
         product1.addPetStore(petstore2);
-                
+
         em.getTransaction().commit();
+        
+        TypedQuery<PetStore> query = em.createQuery("select p from PetStore p where p.id= 1", PetStore.class);        
+        PetStore petstoreSeek = query.getResultList().get(0);
+        
+        StringBuilder sb = new StringBuilder();
+        sb.append("Liste d'animaux :\n");
+        for (Animal animal : petstoreSeek.getAnimals()) {
+        	sb.append(" - ");
+			sb.append(animal.getClass().getName());
+			sb.append("\n");
+		}
+        System.out.println(sb.toString());
+        
         em.close();
         emf.close();
 	}

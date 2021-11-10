@@ -137,6 +137,23 @@ public class Product {
 	
 	public void removePetStore(PetStore petStore) {
 		petStore.getProducts().remove(this);
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Product [id=");
+		builder.append(id);
+		builder.append(", code=");
+		builder.append(code);
+		builder.append(", label=");
+		builder.append(label);
+		builder.append(", price=");
+		builder.append(price);
+		builder.append(", type=");
+		builder.append(type);
+		builder.append("]");
+		return builder.toString();
 	}	
 	
 	

@@ -101,6 +101,23 @@ public class Adress {
 	public void setCity(String city) {
 		this.city = city;
 	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Adress [id=");
+		builder.append(id);
+		builder.append(", number=");
+		builder.append(number);
+		builder.append(", street=");
+		builder.append(street);
+		builder.append(", zipCode=");
+		builder.append(zipCode);
+		builder.append(", city=");
+		builder.append(city);
+		builder.append("]");
+		return builder.toString();
+	}
 	
 	
 }

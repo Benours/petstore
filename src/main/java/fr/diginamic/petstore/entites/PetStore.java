@@ -150,5 +150,22 @@ public class PetStore {
 	
 	public void removeProduct(Product product) {
 		product.getPetStores().remove(this);
-	}	
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("PetStore [id=");
+		builder.append(id);
+		builder.append(", name=");
+		builder.append(name);
+		builder.append(", managerName=");
+		builder.append(managerName);
+		builder.append(", adress=");
+		builder.append(adress.toString());
+		builder.append("]");
+		return builder.toString();
+	}
+	
+	
 }

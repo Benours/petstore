@@ -2,6 +2,7 @@ package fr.diginamic.petstore;
 
 import java.sql.Date;
 import java.util.HashSet;
+import java.util.ResourceBundle;
 import java.util.Set;
 
 import javax.persistence.EntityManager;
@@ -24,12 +25,20 @@ import fr.diginamic.petstore.entites.Product;
 public class Application {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger( Application.class );
-
+	private static final String DATABASE_NAME;
+	private static final String REQUEST_ANIMAL;
+	
+	static {
+		ResourceBundle rb = ResourceBundle.getBundle("petstore");
+		DATABASE_NAME = rb.getString("jpa.db.name");
+		REQUEST_ANIMAL = rb.getString("jpa.request.animaux");
+	}
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
 
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory( "petstore" );
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory( DATABASE_NAME );
         EntityManager em = emf.createEntityManager();
         //Produits
         Product product1 = new Product("aa", "la", 10, ProdType.FOOD);
@@ -63,17 +72,12 @@ public class Application {
 
         em.getTransaction().commit();
         
-        TypedQuery<PetStore> query = em.createQuery("select p from PetStore p where p.id= 1", PetStore.class);        
+        TypedQuery<PetStore> query = em.createQuery(REQUEST_ANIMAL, PetStore.class);        
         PetStore petstoreSeek = query.getResultList().get(0);
         
-        StringBuilder sb = new StringBuilder();
-        sb.append("Liste d'animaux :\n");
         for (Animal animal : petstoreSeek.getAnimals()) {
-        	sb.append(" - ");
-			sb.append(animal.getClass().getName());
-			sb.append("\n");
+        	System.out.println(animal.toString());
 		}
-        System.out.println(sb.toString());
         
         em.close();
         emf.close();

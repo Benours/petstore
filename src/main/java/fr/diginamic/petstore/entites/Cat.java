@@ -39,6 +39,17 @@ public class Cat extends Animal {
 	public void setChipId(String chipId) {
 		this.chipId = chipId;
 	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append(super.toString());
+		builder.append("\n --> Cat [chipId=");
+		builder.append(chipId);
+		builder.append("]");
+		return builder.toString();
+	}
+	
 	
 	
 }
